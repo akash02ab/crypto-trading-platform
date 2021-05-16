@@ -1,0 +1,18 @@
+.transaction {
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 8px 1px gray;
+    padding: 1rem;
+}
+
+.transaction > p:last-child {
+    font-size: 0.8em;
+    color: gray;
+}
+
+.sell {
+    border-left: 0.5rem solid orange;
+}
+
+.buy {
+    border-left: 0.5rem solid limegreen;
+}

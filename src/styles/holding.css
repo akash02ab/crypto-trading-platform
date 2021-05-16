@@ -1,0 +1,14 @@
+.holding {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 8px 1px gray;
+    padding: 1rem;
+}
+
+.profit {
+    color: green;
+}
+
+.loss {
+    color: red;
+}
