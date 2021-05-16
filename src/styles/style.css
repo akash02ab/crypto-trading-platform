@@ -8,7 +8,6 @@
 
 .container {
     padding: 2rem;
-    /* background: url('./images/bg.svg'); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,6 +15,7 @@
     gap: 1.5rem;
     font-family: 'Poppins', sans-serif;
     position: relative;
+    background: url(../assets/bg.svg);
 }
 
 .form {
