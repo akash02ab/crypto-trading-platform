@@ -87,7 +87,7 @@ const App = () => {
                     <Coins market={market} clickHandler={clickHandler} />
                 </div>
                 
-                <div className="form">
+                <div className={`form ${hide}`}>
                     <Form 
                         balance={wallet} 
                         hide={hide} 

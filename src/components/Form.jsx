@@ -3,11 +3,10 @@ import Invoice from "../contexts/Invoice";
 import "../styles/form.css";
 
 let amount = 0;
-let disable = '';
+let disable = 'disable';
   
 const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
     const [trail, setTrail] = useState('Buy');
-    // const [disable, setDisable] = useState('');
     const [charged, setCharged] = useState(0);
     const { invoice, setInvoice } = useContext(Invoice);
     const { name, price } = invoice;
@@ -39,11 +38,12 @@ const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
     const changeHandler = (event) => {
         let value = event.target.value;
 
-        if(isNaN(value)) event.preventDefault();
-        
         let charge = value * price;
         
-        if(trail === 'Buy' && charge > balance) {
+        if(value <= 0 || isNaN(value)) {
+            disable = ('disable');
+        }
+        else if(trail === 'Buy' && charge > balance) {
             disable = ('disable');
         }
         else if(trail === 'Sell' && value > limit) {
@@ -69,7 +69,7 @@ const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
     }
 
     return (    
-        <div className={`form-container ${hide}`}>
+        <div className={`form-container`}>
             <div className="label">
                 <h2>Buy { name }</h2>
                 <button onClick={close}>x</button>

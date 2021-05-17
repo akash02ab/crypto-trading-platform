@@ -8,7 +8,6 @@
     box-shadow: 1px 1px 8px 1px black;
     width: 20rem;
     background: white;
-
 }
 
 .label {
@@ -43,7 +42,6 @@
 }
 
 .content-limit > input {
-    height: 0.5rem;
     width: 3rem;
     flex: 1;
 }
