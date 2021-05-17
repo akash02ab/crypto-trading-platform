@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import Invoice from "../contexts/Invoice";
 import "../styles/form.css";
 
-let amount = 0;
 let disable = 'disable';
   
 const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
     const [trail, setTrail] = useState('Buy');
     const [charged, setCharged] = useState(0);
+    const [amount, setAmount] = useState(0);
     const { invoice, setInvoice } = useContext(Invoice);
     const { name, price } = invoice;
     
@@ -31,28 +31,27 @@ const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
 
     setLimitForSell();
     
+    if(amount <= 0 || isNaN(amount)) {
+        disable = ('disable');
+    }
+    else if(trail === 'Buy' && charged > balance) {
+        disable = ('disable');
+    }
+    else if(trail === 'Sell' && amount > limit) {
+        disable = ('disable');
+    }
+    else {
+        disable = ('');
+    }
+    
     const close = () => {
         setHide('hide');
     }
 
     const changeHandler = (event) => {
         let value = event.target.value;
-
         let charge = value * price;
-        
-        if(value <= 0 || isNaN(value)) {
-            disable = ('disable');
-        }
-        else if(trail === 'Buy' && charge > balance) {
-            disable = ('disable');
-        }
-        else if(trail === 'Sell' && value > limit) {
-            disable = ('disable');
-        }
-        else {
-            disable = ('');
-        }
-        amount = value;
+        setAmount(value);
         setCharged(charge);
     }
     
@@ -77,7 +76,7 @@ const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
             <div className="content">
                 <p>Current Price: ${price}</p>
                 <div className="content-limit">
-                    <input type="number" name="buy" id="coins" min="0" onChange={(e) => changeHandler(e)}/>
+                    <input type="number" name="buy"  min="0" onChange={(e) => changeHandler(e)}/>
                     <p>Max: { limit.toFixed(4) }</p>
                 </div>
                 <p className="charged">You will be charged: ${ charged.toFixed(4) }</p>

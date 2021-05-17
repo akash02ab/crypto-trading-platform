@@ -43,8 +43,8 @@ const App = () => {
             setPortfolio(portfolio + currentInvoice.amount * currentInvoice.currentPrice);
         }
         else {
-            setWallet(wallet + currentInvoice.amount * currentInvoice.price);
-            setPortfolio(portfolio - currentInvoice.amount * currentInvoice.price);
+            setWallet(wallet + currentInvoice.amount * currentInvoice.currentPrice);
+            setPortfolio(portfolio - currentInvoice.amount * currentInvoice.currentPrice);
         }
         
         
