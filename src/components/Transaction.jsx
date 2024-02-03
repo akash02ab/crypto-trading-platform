@@ -3,6 +3,7 @@ const Transaction = ({ invoice }) => {
         name,
         amount,
         price,
+        currentPrice,
         time,
         trade
     } = invoice;
@@ -16,8 +17,8 @@ const Transaction = ({ invoice }) => {
         </div> 
         :
         <div className="transaction sell">
-            <p>{`${name} - ${amount} @ ${price}`}</p>
-            <p>{`Recieved : $${(amount * price).toFixed(4)}`}</p>
+                <p>{`${name} - ${amount} @ ${currentPrice}`}</p>
+                <p>{`Recieved : $${(amount * currentPrice).toFixed(4)}`}</p>
             <p>{`Sold on : ${time.toLocaleString()}`}</p>
         </div>
     );

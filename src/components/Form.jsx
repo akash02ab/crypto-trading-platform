@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Invoice from "../contexts/Invoice";
 import "../styles/form.css";
 
@@ -9,7 +9,7 @@ const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
     const [charged, setCharged] = useState(0);
     const [amount, setAmount] = useState(0);
     const { invoice, setInvoice } = useContext(Invoice);
-    const { name, price } = invoice;
+    const { name, price, currentPrice } = invoice;
     
     let limit = balance / price;
 
@@ -50,7 +50,12 @@ const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
 
     const changeHandler = (event) => {
         let value = event.target.value;
-        let charge = value * price;
+        let charge = 0;
+        if (trail === 'Buy') {
+            charge = value * price;
+        } else {
+            charge = value * currentPrice;
+        }
         setAmount(value);
         setCharged(charge);
     }
@@ -67,6 +72,10 @@ const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
         }
     }
 
+    useEffect(() => {
+        setAmount(0);
+    }, [hide]);
+
     return (    
         <div className={`form-container`}>
             <div className="label">
@@ -76,7 +85,7 @@ const Form = ({ balance, hide, setHide, formSubmitHandler, holding }) => {
             <div className="content">
                 <p>Current Price: ${price}</p>
                 <div className="content-limit">
-                    <input type="number" name="buy"  min="0" onChange={(e) => changeHandler(e)}/>
+                    <input type="number" name="buy" min="0" value={amount} onChange={(e) => changeHandler(e)} />
                     <p>Max: { limit.toFixed(4) }</p>
                 </div>
                 <p className="charged">You will be charged: ${ charged.toFixed(4) }</p>

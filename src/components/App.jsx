@@ -36,6 +36,7 @@ const App = () => {
     }
 
     const formSubmitHandler = (currentInvoice) => {
+        console.log(currentInvoice)
         if(currentInvoice.amount <= 0) return;
 
         if(currentInvoice.trade === 'Buy') {
@@ -99,13 +100,17 @@ const App = () => {
             </Invoice.Provider>
 
             <div className="h-n-t">
-                <div className="holdings">
+                <div className="holding-wrapper">
                     <h1>Current Holdings</h1>
-                    <Holdings holding={holding} />
+                    <div className="holdings">
+                        <Holdings holding={holding} />
+                    </div>
                 </div>
-                <div className="transactions">
+                <div className="transaction-wrapper">
                     <h1>Transactions</h1>
-                    <Transactions transaction={transaction} />
+                    <div className="transactions">
+                        <Transactions transaction={transaction} />
+                    </div>
                 </div>
             </div>
         </div>
