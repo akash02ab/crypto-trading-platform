@@ -36,7 +36,6 @@ const App = () => {
     }
 
     const formSubmitHandler = (currentInvoice) => {
-        console.log(currentInvoice)
         if(currentInvoice.amount <= 0) return;
 
         if(currentInvoice.trade === 'Buy') {
